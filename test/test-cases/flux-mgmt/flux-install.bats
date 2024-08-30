@@ -12,6 +12,7 @@ function setup() {
 
 # shellcheck disable=SC2030
 @test "flux install" {
+    export FUNCTION_OVERRIDE="flux-mgmt/flux-install-overrides.bash"
 
     export KUBE_CONFIG_PATH="/test/kube/config"
     export GITHUB_PRIVATE_KEY="/test/private/key"
@@ -44,7 +45,13 @@ function setup() {
         "init : " \
         "apply --auto-approve : "
 
+
+    # This pulls in the assertDeletePlanTest function.
+    source test/test-cases/flux-mgmt/flux-install-overrides.bash
+
     flux-install.sh test-cluster
+
+    assertInstallTest
 }
 
 function teardown() {

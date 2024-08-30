@@ -7,7 +7,32 @@
 
 # Exit on error
 set -o errexit
-set -x
+
+function waitForFlux() {
+    # Wait for flux to become operational
+    TIMEOUT=300 # Timeout in seconds (5 minutes)
+    START_TIME=$(date +%s)
+    while true; do
+        # Run the command
+        flux check
+
+        # Check the exit status
+        if [ $? -eq 0 ]; then
+            echo "Flux is operational"
+            break
+        else
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            if [ $ELAPSED_TIME -ge $TIMEOUT ]; then
+                echo "Timeout reached. Not all pods are running."
+                exit 1
+            fi
+            # If the command fails, wait for 10 seconds and try again
+            echo "Flux not ready. Retrying in 10 seconds..."
+            sleep 10
+        fi
+    done
+}
 
 # shellcheck disable=SC2046
 SCRIPT_PATH=$(dirname $(realpath "${BASH_SOURCE[0]}"))
@@ -47,3 +72,6 @@ git pull
 git add "$CLUSTER"
 git commit -am "Install flux to $CLUSTER."
 git push
+
+# Wait for flux to become operational
+waitForFlux

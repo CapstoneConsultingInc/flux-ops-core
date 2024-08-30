@@ -16,7 +16,7 @@ if [ -z "$UNIT_TEST_CASE" ]; then
   # shellcheck disable=SC2046
   ROOT_SCRIPT_DIR=$(dirname $(realpath "${BASH_SOURCE[0]}"))
 
-  # Add ops-core source directories to the PATH. Scripts rely on this being set.
+  # Add ops-jet source directories to the PATH. Scripts rely on this being set.
   cd "$ROOT_SCRIPT_DIR"
 
   # Iterate over all directories in the root script directory. The subdirectories

@@ -9,7 +9,7 @@
 set -o errexit
 
 OPS_INFRA_DIR="$OPS_WORKSPACE_ROOT"/ops-infra
-OPS_CORE_DIR="$OPS_WORKSPACE_ROOT"/ops-core
+OPS_CORE_DIR="$OPS_WORKSPACE_ROOT"/ops-jet
 
 # Check if the ops-infra directory exists
 if [ ! -d "$OPS_INFRA_DIR" ]; then
