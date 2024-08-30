@@ -7,6 +7,7 @@
 
 # Exit on error
 set -o errexit
+set -x
 
 # shellcheck disable=SC2046
 SCRIPT_PATH=$(dirname $(realpath "${BASH_SOURCE[0]}"))
@@ -31,6 +32,7 @@ cp -r flux-template "$CLUSTER"
 cd "$CLUSTER" || exit 0
 
 ESCAPED_KUBE_CONFIG_PATH=$(echo "$KUBE_CONFIG_PATH" | sed 's/\//\\\//g')
+
 ESCAPED_GITHUB_PRIVATE_KEY=$(echo "$GITHUB_PRIVATE_KEY" | sed 's/\//\\\//g')
 sed -i "s/<cluster>/$CLUSTER/g" main.tf
 sed -i "s/<private-key>/$ESCAPED_GITHUB_PRIVATE_KEY/g" main.tf
