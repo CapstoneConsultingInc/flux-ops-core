@@ -29,9 +29,12 @@ set -e
 
 cp -r flux-template "$CLUSTER"
 cd "$CLUSTER" || exit 0
+
+ESCAPED_KUBE_CONFIG_PATH=$(echo "$KUBE_CONFIG_PATH" | sed 's/\//\\\//g')
+ESCAPED_GITHUB_PRIVATE_KEY=$(echo "$GITHUB_PRIVATE_KEY" | sed 's/\//\\\//g')
 sed -i "s/<cluster>/$CLUSTER/g" main.tf
-sed -i "s/<private-key>/\/home\/stwall\/.ssh\/id_ed25519/g" main.tf
-sed -i "s/<kube-config>/\/home\/stwall\/.kube\/config/g" main.tf
+sed -i "s/<private-key>/$ESCAPED_GITHUB_PRIVATE_KEY/g" main.tf
+sed -i "s/<kube-config>/$ESCAPED_KUBE_CONFIG_PATH/g" main.tf
 
 terraform init
 terraform apply --auto-approve

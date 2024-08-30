@@ -34,6 +34,7 @@ if [ -z "$UNIT_TEST_CASE" ]; then
   # Start in the workspace root directory.
   cd "$OPS_WORKSPACE_ROOT"
 
+  source .env
 else
   # Pull in any function overrides. Must be done before the below source
   # that override "source" to a noop.
