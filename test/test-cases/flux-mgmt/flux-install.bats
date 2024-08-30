@@ -45,7 +45,6 @@ function setup() {
         "init : " \
         "apply --auto-approve : "
 
-
     # This pulls in the assertDeletePlanTest function.
     source test/test-cases/flux-mgmt/flux-install-overrides.bash
 
