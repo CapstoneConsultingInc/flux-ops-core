@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+############################################################################
+#
+# Replace with something brillant and insightful regarding the script's
+# functionality.
+#
+############################################################################
+
+function setup() {
+    load '../../test_helper/common-setup'
+    _common_setup
+}
+
+# shellcheck disable=SC2030
+@test "<your test>" {
+
+    run <your test>
+    assert_success
+}
+
+function teardown() {
+    # run unstub <something>
+    # assert_success
+    
+    echo 'teardown'
+}
