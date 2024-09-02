@@ -12,9 +12,10 @@ function setup() {
 
 # shellcheck disable=SC2030
 @test "flux install" {
+    # Add the function overrides for this test run.
     export FUNCTION_OVERRIDE="flux-mgmt/flux-install-overrides.bash"
 
-    export KUBE_CONFIG_PATH="/test/kube/config"
+    export KUBECONFIG="/test/kube/config"
     export GITHUB_PRIVATE_KEY="/test/private/key"
 
     stub git \

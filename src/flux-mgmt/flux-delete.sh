@@ -16,14 +16,17 @@ source "$SCRIPT_PATH"/../ops-common-setup.sh
 
 CLUSTER=$1
 
-cd "$OPS_WORKSPACE_ROOT"/ops-infra || exit 1
+cd "$OPS_WORKSPACE_ROOT"/ops-dc-terraform || exit 1
 git fetch -a
 git pull
 
 cd flux/"$CLUSTER" || exit 0
 
+setKubeCtx "$CLUSTER"
+
 terraform init
 terraform destroy --auto-approve
+
 # shellcheck disable=SC2103
 cd ../
 git pull

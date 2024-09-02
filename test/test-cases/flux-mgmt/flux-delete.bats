@@ -12,6 +12,8 @@ function setup() {
 
 # shellcheck disable=SC2030
 @test "flux delete" {
+    # Add the function overrides for this test run.
+    export FUNCTION_OVERRIDE="flux-mgmt/flux-delete-overrides.bash"
 
     stub git \
         "fetch -a : " \
